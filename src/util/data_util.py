@@ -1,3 +1,5 @@
+from util import packet_reader
+
 def read_data(data):
     packets = []
     packets += data.split(b'\n\x00')
@@ -6,6 +8,6 @@ def read_data(data):
         packet += b'\n\x00'
         # Required workaround to handle a strange packet received after ACCT NuLoginPersona
         # where \n\x00 is found in the middle of the packet, making it hard to work with.
-        if len(packet.split()) > 0:
+        if len(packet_reader.read_cmd(packet).split()) > 0:
             packet = b'rank\xc0\x00\x00\n\x00'+packet
     return packets

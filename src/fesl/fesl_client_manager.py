@@ -44,5 +44,7 @@ class run(Protocol):
                 acct.handle(self, txn=txn)
             elif command == "rank":
                 rank.handle(self, txn=txn, data=packet)
+            elif len(command.split()) > 0:
+                rank.handle(self, txn=txn, data=packet)
             else:
                 logging.warning(f"[{self.name}] Unknown command+txn received, how do I handle this?! command={command},txn={txn}")
