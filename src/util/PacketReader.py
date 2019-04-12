@@ -1,6 +1,5 @@
 def read_cmd(packet):
-    command = packet[:4].decode('ascii','ignore')
-    return command
+    return packet[:4].decode('ascii','ignore')
 
 def read_txn(packet):
     try:
@@ -10,9 +9,9 @@ def read_txn(packet):
         return None
 
 def read_pid(packet):
-    pid = packet[4:8]
-    return pid
+    # todo:
+    # make it actually return packet id and not byte 4 to 8.
+    return packet[4:8]
 
-def read_key(packet, key_name):
-    value = packet.decode('ascii','ignore').split(key_name + '=')[1].split('\n')[0]
-    return value
+def read_key(packet, key):
+    return packet.decode('ascii','ignore').split(key+'=')[1].split('\n')[0]
