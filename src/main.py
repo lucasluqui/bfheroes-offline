@@ -1,8 +1,5 @@
 #!python3.7
-import sys
-import time
-import platform
-import subprocess
+import sys, time, logging, platform, subprocess
 from configobj import ConfigObj
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import Factory, Protocol
@@ -10,21 +7,20 @@ from twisted.web import server, resource
 from fesl import FESLClientManager, FESLServerManager
 from theater import TheaterClientManager, TheaterServerManager
 from magma import MagmaWebServer
-from net import KerberosTest
 from inout import JsonServices
 
 def run():
 
     if platform.system() != "Windows":
-        print('Will not attempt to automatically start the game since we are not running on Windows.')
+        logging.warning('Will not attempt to automatically start the game since we are not running on Windows.')
     else:
         print('Attempting to automatically start the game...')
         try:
             subprocess.STARTF_USESHOWWINDOW = 1
             subprocess.Popen('cd game&start.bat', shell=True)
-            print('Game starting.')
+            logging.info('Game started.')
         except:
-            print('A strange error occured whilst trying to start the game, have you renamed any files or avoided run.bat?')
+            logging.error('A strange error occured whilst trying to start the game. Have you renamed any files or bypassed run.bat?')
 
     for service in JsonServices.services:
         port = JsonServices.services[service]['port']
@@ -50,7 +46,7 @@ def run():
                 reactor.listenTCP(port, site)
             except Exception:
                 sys.exit(1)
-        print('['+service+'] Started listening on port: '+str(port))
+        logging.info('['+service+'] Started listening on port: '+str(port))
     reactor.run()
 
 if __name__ == '__main__':
