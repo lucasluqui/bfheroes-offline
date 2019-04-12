@@ -1,0 +1,18 @@
+{
+	"heroName": "nat-gunner",
+	"heroId": "1006",
+	"level": 30,
+	"xp": 1,
+	"c_kit": 2,
+	"c_team": 1,
+	"elo": 1000,
+	"c_apr": "10;73;9;56",
+	"c_fhrs": 0,
+	"c_ft": 0,
+	"c_hrc": 4,
+	"c_hrs": 123,
+	"c_skc": 5,
+	"c_wallet_hero": 99,
+	"c_wallet_valor": 99999,
+	"stats": {}
+}

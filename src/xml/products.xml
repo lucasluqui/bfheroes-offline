@@ -1,0 +1,21 @@
+<products>
+    <product productId="3169">
+		<status>published</status>
+		<attributes>
+			<attribute name="Product Id" value="3169" />
+			<attribute name="Product Name" value="WEST_Custom_Item_3169" />
+			<attribute name="Short Description" value="WEST_Custom_Item_3169_ShortDesc" />
+			<attribute name="Long Description" value="WEST_Custom_Item_3169_LongDesc" />
+			<attribute name="entitlementTag" value="3169-UNLM-" />
+			<attribute name="groupName" value="BFHPC_Knife" />
+			<attribute name="duration" value="" />
+			<attribute name="durationType" value="" />
+			<attribute name="useCount" value="" />
+			<attribute name="sortKey" value="0" />
+		</attributes>
+		<productName>WEST_Custom_Item_3169</productName>
+		<pricePoints>
+			<pricePoint locale="en_US" priceType="SALE_PRICE" currencyType="VIRTUAL_REWARD" currency="_DV" price="1" startDate="" endDate="" />
+		</pricePoints>
+    </product>
+</products>

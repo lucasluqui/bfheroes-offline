@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<billingAccounts>
+	<walletAccount>
+		<currency>_DV</currency>
+		<balance>50</balance>
+	</walletAccount>
+	<walletAccount>
+		<currency>_DB</currency>
+		<balance>50</balance>
+	</walletAccount>
+	<walletAccount>
+		<currency>_DH</currency>
+		<balance>50</balance>
+	</walletAccount>
+</billingAccounts>

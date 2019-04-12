@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<entitlements>
+	<entitlement>
+		<entitlementId>3168</entitlementId>
+		<entitlementTag>3168-UNLM-</entitlementTag>
+		<useCount>0</useCount>
+		<grantDate></grantDate>
+		<terminationDate></terminationDate>
+		<status>ACTIVE</status>
+	</entitlement>
+	<entitlement>
+		<entitlementId>3167</entitlementId>
+		<entitlementTag>3167-UNLM-</entitlementTag>
+		<useCount>0</useCount>
+		<grantDate></grantDate>
+		<terminationDate></terminationDate>
+		<status>ACTIVE</status>
+	</entitlement>
+</entitlements>

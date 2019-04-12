@@ -1,0 +1,24 @@
+{
+    "FESLClientManager":
+    {
+        "port":18270
+    },
+    "FESLServerManager":
+    {
+        "port":18051
+    },
+    "TheaterClientManager":
+    {
+        "port":18275,
+        "port-udp":18275
+    },
+    "TheaterServerManager":
+    {
+        "port":18056,
+        "port-udp":18056
+    },
+    "MagmaWebServer":
+    {
+        "port":88
+    }
+}
