@@ -1,5 +1,3 @@
-import struct
-
 def append(key:str, value:str, last=False):
     new = f'{key}={value}'
     if last != False:
@@ -11,9 +9,7 @@ def append(key:str, value:str, last=False):
 def encode(cmd, pid, data):
     encoded = cmd.encode('ascii', 'ignore')
     encoded += (pid).to_bytes(4, byteorder="big")
-    length = len(data) + 12
-    length = (length).to_bytes(4, byteorder="big")
-    encoded += length
+    encoded += (len(data) + 12).to_bytes(4, byteorder="big")
     encoded += data.encode('ascii', 'ignore')
     return encoded
 
