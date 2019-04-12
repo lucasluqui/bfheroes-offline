@@ -1,78 +1,76 @@
-import time
-import os
-import json
-from util import PacketEncoder, StringUtil
-from inout import JsonPersonas
+import time, os, json, logging
+from util import packet_encoder, string_util
+from inout import json_personas
 
 def handle(self, txn):
-    if txn == "nulogin":
+    if txn == "NuLogin":
         self.pid += 1
-        self.login_key = StringUtil.random_str(24)
-        LoginPacket = PacketEncoder.append('TXN', 'NuLogin')
-        LoginPacket += PacketEncoder.append('profileId', '1001')
-        LoginPacket += PacketEncoder.append('userId', '1001')
-        LoginPacket += PacketEncoder.append('nuid', 'lucas')
-        LoginPacket += PacketEncoder.append('lkey', self.login_key, True)
-        LoginPacket = PacketEncoder.encode('acct', self.pid, LoginPacket)
-        self.transport.getHandle().sendall(LoginPacket)
-        print('[FESLClientManager] Sent LoginPacket')
+        self.login_key = string_util.random_str(24)
+        packet = packet_encoder.append('TXN', 'NuLogin')
+        packet += packet_encoder.append('profileId', '1001')
+        packet += packet_encoder.append('userId', '1001')
+        packet += packet_encoder.append('nuid', 'lucas')
+        packet += packet_encoder.append('lkey', self.login_key, True)
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLClientManager] Sent packet=NuLogin')
 
-    elif txn == 'nugetpersonas':
+    elif txn == 'NuGetPersonas':
         self.pid += 1
-        GetPersonasPacket = PacketEncoder.append('TXN', 'NuGetPersonas')
-        personas = next(os.walk(JsonPersonas.path))[2]
+        packet = packet_encoder.append('TXN', 'NuGetPersonas')
+        personas = next(os.walk(json_personas.path))[2]
         i = 0
         for persona in personas:
             pjson = json.load(open("src/heroes/"+persona, "r"))
-            GetPersonasPacket += PacketEncoder.append('personas.'+str(i), pjson.get('heroName'))
+            packet += packet_encoder.append('personas.'+str(i), pjson.get('heroName'))
             i += 1
-        GetPersonasPacket += PacketEncoder.append('personas.[]', str(i), True)
-        GetPersonasPacket = PacketEncoder.encode('acct', self.pid, GetPersonasPacket)
-        self.transport.getHandle().sendall(GetPersonasPacket)
-        print('[FESLClientManager] Sent GetPersonasPacket')
+        packet += packet_encoder.append('personas.[]', str(i), True)
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLClientManager] Sent packet=NuGetPersonas')
 
-    elif txn == 'nugetaccount':
+    elif txn == 'NuGetAccount':
         self.pid += 1
-        GetAccountPacket = PacketEncoder.append('TXN', 'NuGetAccount')
-        GetAccountPacket += PacketEncoder.append('heroName', 'lucas')
-        GetAccountPacket += PacketEncoder.append('nuid', 'test@test.com')
-        GetAccountPacket += PacketEncoder.append('DOBDay', '1')
-        GetAccountPacket += PacketEncoder.append('DOBMonth', '1')
-        GetAccountPacket += PacketEncoder.append('DOBYear', '2017')
-        GetAccountPacket += PacketEncoder.append('userId', '1001')
-        GetAccountPacket += PacketEncoder.append('globalOptin', '0')
-        GetAccountPacket += PacketEncoder.append('thidPartyOptin', '0')
-        GetAccountPacket += PacketEncoder.append('language', 'enUS')
-        GetAccountPacket += PacketEncoder.append('country', 'US', True)
-        GetAccountPacket = PacketEncoder.encode('acct', self.pid, GetAccountPacket)
-        self.transport.getHandle().sendall(GetAccountPacket)
-        print('[FESLClientManager] Sent GetAccountPacket')
+        packet = packet_encoder.append('TXN', 'NuGetAccount')
+        packet += packet_encoder.append('heroName', 'lucas')
+        packet += packet_encoder.append('nuid', 'test@test.com')
+        packet += packet_encoder.append('DOBDay', '1')
+        packet += packet_encoder.append('DOBMonth', '1')
+        packet += packet_encoder.append('DOBYear', '2017')
+        packet += packet_encoder.append('userId', '1001')
+        packet += packet_encoder.append('globalOptin', '0')
+        packet += packet_encoder.append('thidPartyOptin', '0')
+        packet += packet_encoder.append('language', 'enUS')
+        packet += packet_encoder.append('country', 'US', True)
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLClientManager] Sent packet=NuGetAccount')
 
-    elif txn == 'nuloginpersona':
+    elif txn == 'NuLoginPersona':
         self.pid += 1
-        self.loginkey = StringUtil.random_str(24)
-        LoginPersonaPacket = PacketEncoder.append('TXN', 'NuLoginPersona')
-        LoginPersonaPacket += PacketEncoder.append('lkey', self.loginkey)
-        LoginPersonaPacket += PacketEncoder.append('profileId', '1001')
-        LoginPersonaPacket += PacketEncoder.append('userId', '1001')
-        LoginPersonaPacket = PacketEncoder.encode('acct', self.pid, LoginPersonaPacket)
-        self.transport.getHandle().sendall(LoginPersonaPacket)
-        print('[FESLClientManager] Sent LoginPersonaPacket')
+        self.loginkey = string_util.random_str(24)
+        packet = packet_encoder.append('TXN', 'NuLoginPersona')
+        packet += packet_encoder.append('lkey', self.loginkey)
+        packet += packet_encoder.append('profileId', '1001')
+        packet += packet_encoder.append('userId', '1001')
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLClientManager] Sent packet=NuLoginPersona')
 
-    elif txn == 'nulookupuserinfo':
+    elif txn == 'NuLookupUserInfo':
         self.pid += 1
-        LookUpUserInfoPacket = PacketEncoder.append('TXN', 'NuLookupUserInfo')
-        personas = next(os.walk(JsonPersonas.path))[2]
+        packet = packet_encoder.append('TXN', 'NuLookupUserInfo')
+        personas = next(os.walk(json_personas.path))[2]
         i = 0
         for persona in personas:
             pjson = json.load(open("src/heroes/"+persona, "r"))
-            LookUpUserInfoPacket += PacketEncoder.append('userInfo.'+str(i)+'.userName', pjson.get('heroName'))
-            LookUpUserInfoPacket += PacketEncoder.append('userInfo.'+str(i)+'.userId', pjson.get('heroId'))
-            LookUpUserInfoPacket += PacketEncoder.append('userInfo.'+str(i)+'.namespace', 'MAIN')
-            LookUpUserInfoPacket += PacketEncoder.append('userInfo.'+str(i)+'.xuid', '24')
+            packet += packet_encoder.append('userInfo.'+str(i)+'.userName', pjson.get('heroName'))
+            packet += packet_encoder.append('userInfo.'+str(i)+'.userId', pjson.get('heroId'))
+            packet += packet_encoder.append('userInfo.'+str(i)+'.namespace', 'MAIN')
+            packet += packet_encoder.append('userInfo.'+str(i)+'.xuid', '24')
             i += 1
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.[]', str(i), True)
-        LookUpUserInfoPacket = PacketEncoder.encode('acct', self.pid, LookUpUserInfoPacket)
-        self.transport.getHandle().sendall(LookUpUserInfoPacket)
-        print('[FESLClientManager] Sent LookUpUserInfo')
+        packet += packet_encoder.append('userInfo.[]', str(i), True)
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLClientManager] Sent packet=NuLookupUserInfo')
 

@@ -9,15 +9,13 @@
     },
     "TheaterClientManager":
     {
-        "port":18275,
-        "port-udp":18275
+        "port":18275
     },
     "TheaterServerManager":
     {
-        "port":18056,
-        "port-udp":18056
+        "port":18056
     },
-    "MagmaWebServer":
+    "MagmaAPI":
     {
         "port":88
     }

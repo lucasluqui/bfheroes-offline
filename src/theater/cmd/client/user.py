@@ -1,11 +1,11 @@
-from util import PacketEncoder
-from util import PacketReader
-import time
+import time, logging
+from util import packet_encoder
+from util import packet_reader
 
 def handle(self, data):
-    UserPacket = PacketEncoder.append('TID', PacketReader.read_key(data, 'TID'))
-    UserPacket += PacketEncoder.append('NAME', 'lucas')
-    UserPacket += PacketEncoder.append('CID', '', True)
-    UserPacket = PacketEncoder.encode('user', self.pid, UserPacket)
-    self.transport.getHandle().sendall(UserPacket)
-    print('[TheaterClientManager] Sent UserPacket')
+    packet = packet_encoder.append('TID', packet_reader.read_key(data, 'TID'))
+    packet += packet_encoder.append('NAME', 'lucas')
+    packet += packet_encoder.append('CID', '', True)
+    packet = packet_encoder.encode('user', self.pid, packet)
+    self.transport.getHandle().sendall(packet)
+    print('[TheaterClientManager] Sent packet=user')

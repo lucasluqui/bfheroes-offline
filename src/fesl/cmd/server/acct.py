@@ -1,61 +1,62 @@
-from util import PacketEncoder, StringUtil
+import logging
+from util import packet_encoder, string_util
 
 def handle(self, txn):
-    if txn == 'nulogin':
+    if txn == 'NuLogin':
         self.pid += 1
-        self.login_key = StringUtil.random_str(24)
-        LoginPacket = PacketEncoder.append('TXN', 'NuLogin')
-        LoginPacket += PacketEncoder.append('lkey', self.login_key)
-        LoginPacket += PacketEncoder.append('nuid', 'test-server')
-        LoginPacket += PacketEncoder.append('profileId', '1000')
-        LoginPacket += PacketEncoder.append('userId', '1000')
-        LoginPacket = PacketEncoder.encode('acct', self.pid, LoginPacket)
-        self.transport.getHandle().sendall(LoginPacket)
-        print('[FESLServerManager] Sent LoginPacket')
+        self.login_key = string_util.random_str(24)
+        packet = packet_encoder.append('TXN', 'NuLogin')
+        packet += packet_encoder.append('lkey', self.login_key)
+        packet += packet_encoder.append('nuid', 'test-server')
+        packet += packet_encoder.append('profileId', '1000')
+        packet += packet_encoder.append('userId', '1000')
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLServerManager] Sent packet=NuLogin')
     
-    elif txn == 'nugetpersonas':
+    elif txn == 'NuGetPersonas':
         self.pid += 1
-        GetPersonasPacket = PacketEncoder.append('TXN', 'NuGetPersonas')
-        GetPersonasPacket += PacketEncoder.append('personas.[]', 0)
-        GetPersonasPacket = PacketEncoder.encode('acct', self.pid, GetPersonasPacket)
-        self.transport.getHandle().sendall(GetPersonasPacket)
-        print('[FESLServerManager] Sent GetPersonasPacket')
+        packet = packet_encoder.append('TXN', 'NuGetPersonas')
+        packet += packet_encoder.append('personas.[]', 0)
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLServerManager] Sent packet=NuGetPersonas')
 
-    elif txn == 'nugetaccount':
+    elif txn == 'NuGetAccount':
         self.pid += 1
-        GetAccountPacket = PacketEncoder.append('TXN', 'NuGetAccount')
-        GetAccountPacket += PacketEncoder.append('heroName', 'test-server')
-        GetAccountPacket += PacketEncoder.append('nuid', 'test-server@test.com')
-        GetAccountPacket += PacketEncoder.append('DOBDay', '1')
-        GetAccountPacket += PacketEncoder.append('DOBMonth', '1')
-        GetAccountPacket += PacketEncoder.append('DOBYear', '2017')
-        GetAccountPacket += PacketEncoder.append('userId', '1000')
-        GetAccountPacket += PacketEncoder.append('globalOptin', '0')
-        GetAccountPacket += PacketEncoder.append('thidPartyOptin', '0')
-        GetAccountPacket += PacketEncoder.append('language', 'enUS')
-        GetAccountPacket += PacketEncoder.append('country', 'US')
-        GetAccountPacket = PacketEncoder.encode('acct', self.pid, GetAccountPacket)
-        self.transport.getHandle().sendall(GetAccountPacket)
-        print('[FESLServerManager] Sent GetAccountPacket')
+        packet = packet_encoder.append('TXN', 'NuGetAccount')
+        packet += packet_encoder.append('heroName', 'test-server')
+        packet += packet_encoder.append('nuid', 'test-server@test.com')
+        packet += packet_encoder.append('DOBDay', '1')
+        packet += packet_encoder.append('DOBMonth', '1')
+        packet += packet_encoder.append('DOBYear', '2017')
+        packet += packet_encoder.append('userId', '1000')
+        packet += packet_encoder.append('globalOptin', '0')
+        packet += packet_encoder.append('thidPartyOptin', '0')
+        packet += packet_encoder.append('language', 'enUS')
+        packet += packet_encoder.append('country', 'US')
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLServerManager] Sent packet=NuGetAccount')
 
-    elif txn == 'nuloginpersona':
-        LoginPersonaPacket = PacketEncoder.append('TXN', 'NuLoginPersona')
-        LoginPersonaPacket += PacketEncoder.append('lkey', self.login_key)
-        LoginPersonaPacket += PacketEncoder.append('profileId', '1000')
-        LoginPersonaPacket += PacketEncoder.append('userId', '1000')
-        LoginPersonaPacket = PacketEncoder.encode('acct', self.pid, LoginPersonaPacket)
-        self.transport.getHandle().sendall(LoginPersonaPacket)
-        print('[FESLServerManager] Sent LoginPersonaPacket')
+    elif txn == 'NuLoginPersona':
+        packet = packet_encoder.append('TXN', 'NuLoginPersona')
+        packet += packet_encoder.append('lkey', self.login_key)
+        packet += packet_encoder.append('profileId', '1000')
+        packet += packet_encoder.append('userId', '1000')
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLServerManager] Sent packet=NuLoginPersona')
 
-    elif txn == 'nulookupuserinfo':
-        LookUpUserInfoPacket = PacketEncoder.append('TXN', 'NuLookupUserInfo')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.userName', 'test-server')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.userId', '1000')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.masterUserId', '1000')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.namespace', 'MAIN')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.xuid', '24')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.0.cid', '1000')
-        LookUpUserInfoPacket += PacketEncoder.append('userInfo.[]', '1')
-        LookUpUserInfoPacket = PacketEncoder.encode('acct', self.pid, LookUpUserInfoPacket)
-        self.transport.getHandle().sendall(LookUpUserInfoPacket)
-        print('[FESLServerManager] Sent LookUpUserInfoPacket')
+    elif txn == 'NuLookupUserInfo':
+        packet = packet_encoder.append('TXN', 'NuLookupUserInfo')
+        packet += packet_encoder.append('userInfo.0.userName', 'test-server')
+        packet += packet_encoder.append('userInfo.0.userId', '1000')
+        packet += packet_encoder.append('userInfo.0.masterUserId', '1000')
+        packet += packet_encoder.append('userInfo.0.namespace', 'MAIN')
+        packet += packet_encoder.append('userInfo.0.xuid', '24')
+        packet += packet_encoder.append('userInfo.0.cid', '1000')
+        packet += packet_encoder.append('userInfo.[]', '1')
+        packet = packet_encoder.encode('acct', self.pid, packet)
+        self.transport.getHandle().sendall(packet)
+        print('[FESLServerManager] Sent packet=NuLookupUserInfo')

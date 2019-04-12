@@ -5,18 +5,17 @@ from configobj import ConfigObj
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import Factory, Protocol
 from twisted.web import server, resource
-from fesl import FESLClientManager, FESLServerManager
-from theater import TheaterClientManager, TheaterServerManager
-from magma import MagmaWebServer
-from inout import JsonServices
+from fesl import fesl_client_manager, fesl_server_manager
+from theater import theater_client_manager, theater_server_manager
+from magma import magma_api
+from inout import json_services
 
 def run():
-
 
     log_file = 'logs/backend-'+strftime('%b-%d-%Y-%H-%M-%S')+'.log'
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
     logging.basicConfig(level=logging.DEBUG)
-    logging.FileHandler(log_file, mode="w", encoding=None, delay=False)
+    logging.FileHandler(log_file, mode="w", encoding='utf-8', delay=False)
 
     if platform.system() != "Windows":
         logging.warning('Will not attempt to automatically start the game since we are not running on Windows.')
@@ -29,30 +28,40 @@ def run():
         except:
             logging.error('A strange error occured whilst trying to start the game. Have you renamed any files or bypassed run.bat?')
 
-    for service in JsonServices.services:
-        port = JsonServices.services[service]['port']
-        if service != "MagmaWebServer":
+    services = json_services.services
+    for service in services:
+        port = services[service]['port']
+        
+        if service != "MagmaAPI":
             try:
                 factory = Factory()
+                
                 if service == "FESLClientManager":
-                    factory.protocol = FESLClientManager.HANDLER
+                    factory.protocol = fesl_client_manager.run
+               
                 elif service == "FESLServerManager":
-                    factory.protocol = FESLServerManager.HANDLER
+                    factory.protocol = fesl_server_manager.run
+                
                 elif service == "TheaterClientManager":
-                    factory.protocol = TheaterClientManager.HANDLER
-                    reactor.listenUDP(JsonServices.services['TheaterClientManager']['port-udp'], TheaterClientManager.HANDLER_UDP())
+                    factory.protocol = theater_client_manager.run
+                    reactor.listenUDP(port, theater_client_manager.run_datagram())
+                
                 elif service == "TheaterServerManager":
-                    factory.protocol = TheaterServerManager.HANDLER
-                    reactor.listenUDP(JsonServices.services['TheaterServerManager']['port-udp'], TheaterServerManager.HANDLER_UDP())
+                    factory.protocol = theater_server_manager.run
+                    reactor.listenUDP(port, theater_server_manager.run_datagram())
+                
                 reactor.listenTCP(port, factory)
+            
             except Exception:
                 sys.exit(1)
         else:
             try:
-                site = server.Site(MagmaWebServer.Simple())
+                site = server.Site(magma_api.run())
                 reactor.listenTCP(port, site)
+            
             except Exception:
                 sys.exit(1)
+        
         logging.info('['+service+'] Started listening on port: '+str(port))
     reactor.run()
 
