@@ -1,5 +1,6 @@
 #!python3.7
-import sys, time, logging, platform, subprocess
+import sys, os, time, logging, platform, subprocess
+from time import strftime
 from configobj import ConfigObj
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import Factory, Protocol
@@ -10,6 +11,12 @@ from magma import MagmaWebServer
 from inout import JsonServices
 
 def run():
+
+
+    log_file = 'logs/backend-'+strftime('%b-%d-%Y-%H-%M-%S')+'.log'
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    logging.basicConfig(level=logging.DEBUG)
+    logging.FileHandler(log_file, mode="w", encoding=None, delay=False)
 
     if platform.system() != "Windows":
         logging.warning('Will not attempt to automatically start the game since we are not running on Windows.')
