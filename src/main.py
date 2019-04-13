@@ -14,8 +14,7 @@ def run():
 
     log_file = 'logs/backend-'+strftime('%b-%d-%Y-%H-%M-%S')+'.log'
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
-    logging.basicConfig(level=logging.DEBUG)
-    logging.FileHandler(log_file, mode="w", encoding='utf-8', delay=False)
+    logging.basicConfig(filename=log_file, filemode="w", stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s', datefmt='%H:%M:%S')
 
     if platform.system() != "Windows":
         logging.warning('Will not attempt to automatically start the game since we are not running on Windows.')
@@ -62,7 +61,7 @@ def run():
             except Exception:
                 sys.exit(1)
         
-        logging.info('['+service+'] Started listening on port: '+str(port))
+        logging.info(f'[{service}] Now listening on port {str(port)}')
     reactor.run()
 
 if __name__ == '__main__':
