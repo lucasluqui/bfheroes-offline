@@ -1,7 +1,6 @@
 #!python3.7
 import sys, os, time, logging, platform, subprocess
 from time import strftime
-from configobj import ConfigObj
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import Factory, Protocol
 from twisted.web import server, resource
