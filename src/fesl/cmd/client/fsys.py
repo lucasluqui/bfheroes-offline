@@ -25,11 +25,11 @@ def handle(self, txn):
         packet = packet_encoder.encode('fsys', self.pid, packet)
 
         self.transport.getHandle().sendall(mem_packet)
-        self.log.debug('[FESLClientManager] Sent packet=MemCheck')
+        self.log.debug(f'[{self.name}] Sent packet=MemCheck')
         self.transport.getHandle().sendall(session_packet)
-        self.log.debug('[FESLClientManager] Sent packet=GetSessonId')
+        self.log.debug(f'[{self.name}] Sent packet=GetSessonId')
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLClientManager] Sent packet=Hello')
+        self.log.debug(f'[{self.name}] Sent packet=Hello')
 
     elif txn == "MemCheck":
         pass
@@ -50,7 +50,7 @@ def handle(self, txn):
         packet += packet_encoder.append('pingSites.1.type', 0)
         packet = packet_encoder.encode('fsys', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLClientManager] Sent packet=GetPingSites')
+        self.log.debug(f'[{self.name}] Sent packet=GetPingSites')
 
     else:
         pass

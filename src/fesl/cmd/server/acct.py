@@ -12,7 +12,7 @@ def handle(self, txn):
         packet += packet_encoder.append('userId', '1000')
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLServerManager] Sent packet=NuLogin')
+        self.log.debug(f'[{self.name}] Sent packet=NuLogin')
     
     elif txn == 'NuGetPersonas':
         self.pid += 1
@@ -20,7 +20,7 @@ def handle(self, txn):
         packet += packet_encoder.append('personas.[]', 0)
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLServerManager] Sent packet=NuGetPersonas')
+        self.log.debug(f'[{self.name}] Sent packet=NuGetPersonas')
 
     elif txn == 'NuGetAccount':
         self.pid += 1
@@ -37,7 +37,7 @@ def handle(self, txn):
         packet += packet_encoder.append('country', 'US')
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLServerManager] Sent packet=NuGetAccount')
+        self.log.debug(f'[{self.name}] Sent packet=NuGetAccount')
 
     elif txn == 'NuLoginPersona':
         packet = packet_encoder.append('TXN', 'NuLoginPersona')
@@ -46,7 +46,7 @@ def handle(self, txn):
         packet += packet_encoder.append('userId', '1000')
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLServerManager] Sent packet=NuLoginPersona')
+        self.log.debug(f'[{self.name}] Sent packet=NuLoginPersona')
 
     elif txn == 'NuLookupUserInfo':
         packet = packet_encoder.append('TXN', 'NuLookupUserInfo')
@@ -59,4 +59,4 @@ def handle(self, txn):
         packet += packet_encoder.append('userInfo.[]', '1')
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        self.log.debug('[FESLServerManager] Sent packet=NuLookupUserInfo')
+        self.log.debug(f'[{self.name}] Sent packet=NuLookupUserInfo')
