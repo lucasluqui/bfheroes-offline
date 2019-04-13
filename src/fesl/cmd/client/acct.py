@@ -13,7 +13,7 @@ def handle(self, txn):
         packet += packet_encoder.append('lkey', self.login_key, True)
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=NuLogin')
+        self.log.debug('[FESLClientManager] Sent packet=NuLogin')
 
     elif txn == 'NuGetPersonas':
         self.pid += 1
@@ -27,7 +27,7 @@ def handle(self, txn):
         packet += packet_encoder.append('personas.[]', str(i), True)
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=NuGetPersonas')
+        self.log.debug('[FESLClientManager] Sent packet=NuGetPersonas')
 
     elif txn == 'NuGetAccount':
         self.pid += 1
@@ -44,7 +44,7 @@ def handle(self, txn):
         packet += packet_encoder.append('country', 'US', True)
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=NuGetAccount')
+        self.log.debug('[FESLClientManager] Sent packet=NuGetAccount')
 
     elif txn == 'NuLoginPersona':
         self.pid += 1
@@ -55,7 +55,7 @@ def handle(self, txn):
         packet += packet_encoder.append('userId', '1001')
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=NuLoginPersona')
+        self.log.debug('[FESLClientManager] Sent packet=NuLoginPersona')
 
     elif txn == 'NuLookupUserInfo':
         self.pid += 1
@@ -72,5 +72,5 @@ def handle(self, txn):
         packet += packet_encoder.append('userInfo.[]', str(i), True)
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=NuLookupUserInfo')
+        self.log.debug('[FESLClientManager] Sent packet=NuLookupUserInfo')
 

@@ -8,4 +8,4 @@ def handle(self, data):
     packet += packet_encoder.append('CID', '', True)
     packet = packet_encoder.encode('user', self.pid, packet)
     self.transport.getHandle().sendall(packet)
-    print('[TheaterClientManager] Sent packet=user')
+    self.log.debug('[TheaterClientManager] Sent packet=user')

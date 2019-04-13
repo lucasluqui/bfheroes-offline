@@ -8,22 +8,23 @@ class run(Protocol):
     def __init__(self):
         self.name = "FESLServerManager"
         self.pid = 0
+        self.log = logging.getLogger('root')
 
     def connectionMade(self):
         self.ip, self.port = self.transport.client
-        print(f"[{self.name}] Connection initiated, ip={self.ip}")
+        self.log.info(f"[{self.name}] Connection initiated, ip={self.ip}")
 
     def timeoutConnection(self):
-        print(f"[{self.name}] Client timeout, ip={self.ip}")
+        self.log.info(f"[{self.name}] Client timeout, ip={self.ip}")
 
     def connectionLost(self, reason):
-        print(f"[{self.name}] Client lost connection, ip={self.ip}")
+        self.log.warning(f"[{self.name}] Client lost connection, ip={self.ip}")
 
     def readConnectionLost(self):
         self.transport.loseConnection()
 
     def writeConnectionLost(self):
-        print(f"[{self.name}] Closing client connection, ip={self.ip}")
+        self.log.info(f"[{self.name}] Closing client connection, ip={self.ip}")
         self.transport.loseConnection()
 
     def dataReceived(self, data):
@@ -35,11 +36,11 @@ class run(Protocol):
             command = packet_reader.read_cmd(packet)
             packet_id = packet_reader.read_pid(packet)
             
-            logging.info(f"[{self.name}] command={command},txn={txn}")
+            self.log.debug(f"[{self.name}] command={command},txn={txn}")
             
             if command == "fsys":
                 fsys.handle(self, txn=txn)
             elif command == "acct":
                 acct.handle(self, txn=txn)
             else:
-                logging.warning(f"[{self.name}] Unknown command+txn received, how do I handle this?! command={command},txn={txn}")
+                self.log.warning(f"[{self.name}] Unknown command+txn received, how do I handle this?! command={command},txn={txn}")

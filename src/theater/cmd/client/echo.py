@@ -11,4 +11,4 @@ def handle(self, data, addr):
     packet += packet_encoder.append('TYPE', 1)
     packet = packet_encoder.encode('ECHO', self.pid, packet)
     self.transport.write(packet, addr)
-    print('[UDP TheaterClientManager] Sent packet=ECHO')
+    self.log.debug('[UDP TheaterClientManager] Sent packet=ECHO')

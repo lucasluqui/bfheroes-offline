@@ -17,7 +17,7 @@ def run():
     if platform.system() != "Windows":
         log.warning('Will not attempt to automatically start the game since we are not running on Windows.')
     else:
-        print('Attempting to automatically start the game...')
+        log.debug('Attempting to automatically start the game...')
         try:
             subprocess.STARTF_USESHOWWINDOW = 1
             subprocess.Popen('cd game&start.bat', shell=True)

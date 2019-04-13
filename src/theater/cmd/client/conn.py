@@ -9,4 +9,4 @@ def handle(self, data):
     packet += packet_encoder.append('PROT', packet_reader.read_key(data, 'PROT'))
     packet = packet_encoder.encode('CONN', self.pid, packet)
     self.transport.getHandle().sendall(packet)
-    print('[TheaterClientManager] Sent packet=CONN')
+    self.log.debug('[TheaterClientManager] Sent packet=CONN')

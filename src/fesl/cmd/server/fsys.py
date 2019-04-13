@@ -22,9 +22,9 @@ def handle (self, txn):
         packet = packet_encoder.encode('fsys', self.pid, packet)
 
         self.transport.getHandle().sendall(mem_packet)
-        print('[FESLServerManager] Sent packet=MemCheck')
+        self.log.debug('[FESLServerManager] Sent packet=MemCheck')
         self.transport.getHandle().sendall(packet)
-        print('[FESLServerManager] Sent packet=Hello')
+        self.log.debug('[FESLServerManager] Sent packet=Hello')
 
     elif txn == "MemCheck":
         pass

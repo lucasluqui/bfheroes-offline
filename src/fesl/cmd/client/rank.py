@@ -28,7 +28,7 @@ def handle(self, txn, data):
         packet += packet_encoder.append('stats.[]', total_keys)
         packet = packet_encoder.encode('rank', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=GetStats')
+        self.log.debug('[FESLClientManager] Sent packet=GetStats')
 
     elif txn == "GetStatsForOwners":
         self.pid += 1
@@ -63,9 +63,9 @@ def handle(self, txn, data):
         packet += packet_encoder.append('stats.[]', total_owners)
         packet = packet_encoder.encode('rank', self.pid, packet)
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=GetStatsForOwners')
+        self.log.debug('[FESLClientManager] Sent packet=GetStatsForOwners')
 
     elif txn == "UpdateStats":
         packet = packet_encoder.encode('rank', 0xC0000000, packet_encoder.append('TXN', 'UpdateStats'))
         self.transport.getHandle().sendall(packet)
-        print('[FESLClientManager] Sent packet=UpdateStats')
+        self.log.debug('[FESLClientManager] Sent packet=UpdateStats')
