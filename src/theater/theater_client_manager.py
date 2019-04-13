@@ -42,7 +42,7 @@ class run_datagram(DatagramProtocol):
     def __init__(self):
         self.name = "(UDP) TheaterClientManager"
         self.pid = 0
-        self.log = logger.getLogger('root')
+        self.log = logging.getLogger('root')
 
     def datagramReceived(self, data, addr):
         command = packet_reader.read_cmd(data)
