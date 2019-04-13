@@ -1,10 +1,21 @@
 # bfheroes-offline
-bfheroes-offline allows you to run your own Battlefield Heroes environment without any internet connection (localhost).
+Allows you to run your own Battlefield Heroes environment without any internet connection (localhost).
 
 ## Release Candidates (Full downloads)
 As you might have noticed **game files** and some other executables **aren't** sourced **here**, therefore you **wont be able to run anything**.
 
-Full **release candidates** can be found **in this Discord**: https://discord.gg/9uwyBVA *(channel: #bfheroes-offline)*
+Full **release candidates** can be found **in this Discord**: https://discord.gg/9uwyBVA *(channel: `#bfheroes-offline`)*
+
+## Editing your hosts file
+The following lines must be added to your hosts file (`Windows\System32\drivers\etc\hosts`)
+```
+127.0.0.1 www.battlefieldheroes.com
+127.0.0.1 bfwest-dedicated.fesl.ea.com
+127.0.0.1 bfwest-server.fesl.ea.com
+127.0.0.1 fesl.ea.com
+127.0.0.1 master.phoenixnetwork.net
+127.0.0.1 magma.phoenixnetwork.net
+```
 
 ## Features
 * Easily create heroes and edit their stats through noob-friendly .json files.
@@ -17,10 +28,6 @@ Full **release candidates** can be found **in this Discord**: https://discord.gg
 
 If you have any suggestions feel free to submit a pull request or contact my privately on Discord (linked above).
 
-## Thanks to
-* **LifeCoder**: Helping me resolve packet encoding issues, Phoenix Network's `dinput8.dll`
-* **Marek Grzyb**: BFHeroes_MasterServer repository in Python 2.7
-
 ## Speed
 
 | Action        | Time in seconds |
@@ -28,3 +35,7 @@ If you have any suggestions feel free to submit a pull request or contact my pri
 | Login         | 11s             |
 | Joining a game (tutorial)| ~20s             |
 | Joining a game (gameserver)| ??s             |
+
+## Thanks to
+* **LifeCoder**: Helping me resolve packet encoding issues, Phoenix Network's `dinput8.dll`
+* **Marek Grzyb**: BFHeroes_MasterServer repository in Python 2.7
