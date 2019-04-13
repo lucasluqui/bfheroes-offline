@@ -17,6 +17,10 @@ Full **release candidates** can be found **in this Discord**: https://discord.gg
 
 If you have any suggestions feel free to submit a pull request or contact my privately on Discord (linked above).
 
+## Thanks to
+* **LifeCoder**: Helping me resolve packet encoding issues, Phoenix Network's `dinput8.dll`
+* **Marek Grzyb**: BFHeroes_MasterServer repository in Python 2.7
+
 ## Speed
 
 | Action        | Time in seconds |
