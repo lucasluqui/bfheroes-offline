@@ -1,5 +1,4 @@
-import subprocess
-import sys
+import subprocess, sys
 
 requirements = open("requirements.txt", "r")
 
