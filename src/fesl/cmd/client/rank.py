@@ -1,6 +1,5 @@
 import json, logging
-from util import packet_encoder, packet_reader
-from inout import json_personas
+from util import packet_encoder, packet_reader, json_personas
 
 def handle(self, txn, data):
     if txn == "GetStats":

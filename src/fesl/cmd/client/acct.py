@@ -1,6 +1,5 @@
 import time, os, json, logging
-from util import packet_encoder, string_util
-from inout import json_personas
+from util import packet_encoder, string_util, json_personas
 
 def handle(self, txn):
     if txn == "NuLogin":
