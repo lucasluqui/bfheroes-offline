@@ -19,7 +19,7 @@ def handle(self, txn, data):
                 if int(heroId) != int(json_personas.CONFIG['Settings']['AccountID']):
                     pjson = json.load(open(json_personas.path+heroId+'.json', "r"))
                 else:
-                    pjson = json.load(open(json_personas.path+'globalStats.json', "r"))
+                    pjson = json_personas.global_stats
                 packet += packet_encoder.append('stats.'+str(i)+'.key', key_names[i])
                 packet += packet_encoder.append('stats.'+str(i)+'.value', pjson.get(key_names[i], ""))
                 packet += packet_encoder.append('stats.'+str(i)+'.text', pjson.get(key_names[i], ""))
