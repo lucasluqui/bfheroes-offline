@@ -1,4 +1,4 @@
-# bfheroes-offline (Battlefield Heroes Offline Environment)
+# bfheroes-offline
 bfheroes-offline allows you to run your own Battlefield Heroes environment without any internet connection (localhost).
 
 ## Release Candidates (Full downloads)
