@@ -49,14 +49,16 @@ def run():
                 
                 reactor.listenTCP(port, factory)
             
-            except Exception:
+            except Exception as err:
+                log.error(err)
                 sys.exit(1)
         else:
             try:
                 site = server.Site(magma_api.run())
                 reactor.listenTCP(port, site)
             
-            except Exception:
+            except Exception as err:
+                log.error(err)
                 sys.exit(1)
         
         log.info(f'[{service}] Now listening on port {str(port)}')
