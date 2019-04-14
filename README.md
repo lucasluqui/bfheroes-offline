@@ -22,7 +22,6 @@ The following lines must be added to your hosts file (`Windows\System32\drivers\
 
 ## To-do
 * Local gameserver.
-* A few tweaks in MagmaAPI to support fully enabled magma without unexpected crashes.
 
 If you have any suggestions feel free to submit a pull request or contact my privately on Discord (linked above).
 
