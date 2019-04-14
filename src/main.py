@@ -25,7 +25,8 @@ def run():
             cmdline = 'cd '+CONFIG['Settings']['GameFolderName']+'&BFHeroes.exe +sessionId '+CONFIG['Settings']['SessionID']+'+ignoreAsserts 1 +magma '+CONFIG['Settings']['Magma']+' +magmaProtocol '+CONFIG['Settings']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
             subprocess.Popen(cmdline, shell=True)
             log.info('Game started.')
-        except:
+        except Exception as err:
+            log.error(err)
             log.error('A strange error occured whilst trying to start the game. Have you renamed any files?')
 
     services = json_services.services
