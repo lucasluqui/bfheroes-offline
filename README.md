@@ -35,5 +35,6 @@ If you have any suggestions feel free to submit a pull request or contact my pri
 | Joining a game (gameserver)| ??s             |
 
 ## Thanks to
-* **LifeCoder**: Helping me resolve packet encoding issues, Phoenix Network's `dinput8.dll`
+* **LifeCoder**: Helping me resolve packet encoding issues, some Magma replies, Phoenix Network's `dinput8.dll`
 * **Marek Grzyb**: BFHeroes_MasterServer repository in Python 2.7
+* **MaxBosse**: HeroesAwaken/GoFesl repository.
