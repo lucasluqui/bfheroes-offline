@@ -8,6 +8,7 @@ class run(resource.Resource):
         self.name = "Magma API"
         self.log = logging.getLogger('root')
         self.config = ConfigObj('src/config.ini')
+        self.abilitiesOwned = []
 
     isLeaf = True
 
@@ -58,5 +59,27 @@ class run(resource.Resource):
         if uri.split(':')[0] == '/relationships/status/nucleus':
             request.setHeader('content-type', 'text/plain; charset=utf-8')
             reply = '<update><id>1</id><name>Test</name><state>ACTIVE</state><type>server</type><status>Online</status><realid>' + uri.split(':')[1] + '</realid></update>'
+            self.log.info(f"[{self.name}] POST reply={reply}")
+            return reply.encode('utf-8', 'ignore')
+
+        elif '/ofb/purchase/' in uri:
+            entitlement_id = uri.split('/ofb/purchase/')[1].split('/')[1]
+            if 2999 > int(entitlement_id) > 2000:
+                self.abilitiesOwned.append(entitlement_id)
+            reply = '<success></success>'
+            self.log.info(f"[{self.name}] POST reply={reply}")
+            return reply.encode('utf-8', 'ignore')
+
+        elif '/nucleus/refundAbilities/' in uri:
+            if self.abilitiesOwned == []:
+                reply = '<success code="NO_CHANGE"></success>'
+            else:
+                persona_id = uri.split('/nucleus/refundAbilities/')[1].split('/')[0]
+                pjson = json.load(open(json_personas.path+persona_id+'.json', "r"))
+                reply = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><success code="REFUNDED"><walletAccount><currency>_DH</currency><balance>'+str(pjson.get('c_wallet_hero', '0'))+'</balance></walletAccount><refunded>'
+                for ability in self.abilitiesOwned:
+                    reply += '<item>'+ability+'</item>'
+                reply += '</refunded></success>'
+                self.abilitiesOwned.clear()
             self.log.info(f"[{self.name}] POST reply={reply}")
             return reply.encode('utf-8', 'ignore')
