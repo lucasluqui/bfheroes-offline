@@ -1,5 +1,6 @@
 #!python3.7
 import sys, os, time, logging, platform, subprocess
+from configobj import ConfigObj
 from time import strftime
 from twisted.internet import ssl, reactor
 from twisted.internet.protocol import Factory, Protocol
@@ -13,6 +14,7 @@ from magma import magma_api
 def run():
 
     log = logging.getLogger('root')
+    CONFIG = ConfigObj('src/config.ini')
 
     if platform.system() != "Windows":
         log.warning('Will not attempt to automatically start the game since we are not running on Windows.')
@@ -20,10 +22,11 @@ def run():
         log.debug('Attempting to automatically start the game...')
         try:
             subprocess.STARTF_USESHOWWINDOW = 1
-            subprocess.Popen('cd game&start.bat', shell=True)
+            cmdline = 'cd '+CONFIG['Settings']['GameFolderName']+'&BFHeroes.exe +sessionId '+CONFIG['Settings']['SessionID']+'+ignoreAsserts 1 +magma '+CONFIG['Settings']['Magma']+' +magmaProtocol '+CONFIG['Settings']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
+            subprocess.Popen(cmdline, shell=True)
             log.info('Game started.')
         except:
-            log.error('A strange error occured whilst trying to start the game. Have you renamed any files or bypassed run.bat?')
+            log.error('A strange error occured whilst trying to start the game. Have you renamed any files?')
 
     services = json_services.services
     for service in services:
