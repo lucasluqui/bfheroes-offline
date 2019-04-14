@@ -34,17 +34,22 @@ class run(resource.Resource):
         elif uri == '/ofb/products':
             reply = open("src/xml/products.xml", "r")
             self.log.info(f"[{self.name}] GET reply=xml/products.xml")
-            return reply.read()
+            return reply.read().encode('utf-8', 'ignore')
         
         elif uri.find('/nucleus/entitlements/') == 0:
             reply = open("src/xml/entitlements.xml", "r")
             self.log.info(f"[{self.name}] GET reply=xml/entitlements.xml")
-            return reply.read()
+            return reply.read().encode('utf-8', 'ignore')
 
-        elif uri.find('/nucleus/wallets/') == 0:
-            reply = open("src/xml/wallets.xml", "r")
+        elif '/nucleus/wallets/' in uri:
+            persona_id = uri.split('/nucleus/wallets/')[1]
+            pjson = json.load(open(json_personas.path+persona_id+'.json', "r"))
+            reply = open("src/xml/wallets.xml", "r").read()
+            reply = reply.replace('[vp]', str(pjson.get('c_wallet_valor', '0')))
+            reply = reply.replace('[hp]', str(pjson.get('c_wallet_hero', '0')))
+            reply = reply.replace('[bf]', str(pjson.get('c_wallet_battlefunds', '0')))
             self.log.info(f"[{self.name}] GET reply=xml/wallets.xml")
-            return reply.read()
+            return reply.encode('utf-8', 'ignore')
 
     def render_POST(self, request):
         uri=request.uri.decode()

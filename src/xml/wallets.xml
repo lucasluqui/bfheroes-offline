@@ -2,14 +2,14 @@
 <billingAccounts>
 	<walletAccount>
 		<currency>_DV</currency>
-		<balance>50</balance>
+		<balance>[vp]</balance>
 	</walletAccount>
 	<walletAccount>
 		<currency>_DB</currency>
-		<balance>50</balance>
+		<balance>[bf]</balance>
 	</walletAccount>
 	<walletAccount>
 		<currency>_DH</currency>
-		<balance>50</balance>
+		<balance>[hp]</balance>
 	</walletAccount>
 </billingAccounts>
