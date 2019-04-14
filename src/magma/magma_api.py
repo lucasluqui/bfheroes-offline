@@ -1,10 +1,13 @@
-import logging, time, os
+import logging, time, os, json
+from configobj import ConfigObj
 from twisted.web import resource
+from util import json_personas
 
 class run(resource.Resource):
     def __init__(self):
         self.name = "Magma API"
         self.log = logging.getLogger('root')
+        self.config = ConfigObj('src/config.ini')
 
     isLeaf = True
 
@@ -14,12 +17,13 @@ class run(resource.Resource):
         request.setHeader('content-type', 'text/xml; charset=utf-8')
 
         if uri == '/nucleus/authToken':
-            reply = '<success><token code="NEW_TOKEN">123456</token></success>'
+            reply = '<success><token code="NEW_TOKEN">'+self.config['Settings']['SessionID']+'</token></success>'
             self.log.info(f"[{self.name}] GET reply={reply}")
             return reply.encode('utf-8', 'ignore')
 
         elif '/nucleus/check/user/' in uri:
-            reply = '<name>'+uri.replace('/nucleus/check/user/','')+'</name>'
+            persona = json.load(open(json_personas.path+uri.replace('/nucleus/check/user/','')+'.json', "r"))
+            reply = '<name>'+persona.get('heroName', 'undefined')+'</name>'
             self.log.info(f"[{self.name}] GET reply={reply}")
             return reply.encode('utf-8', 'ignore')
 
