@@ -19,6 +19,7 @@ The following lines must be added to your hosts file (`Windows\System32\drivers\
 * Easily create heroes and edit their stats through noob-friendly .json files.
 * All items and weapons in your inventory.
 * Tutorial gamemode. Map and gamemode can be changed in `game/mods/bfheroes/Settings/maplist.con`
+* Functional MagmaAPI (Magma has to be manually enabled in `src/config.ini`), which allows you to play around with entitlements/store/friends/bookmarks.
 
 ## To-do
 * Local gameserver.
