@@ -1,13 +1,16 @@
 import time, os, json, logging
+from configobj import ConfigObj
 from util import packet_encoder, string_util, json_personas
+
+CONFIG = ConfigObj('src/config.ini')
 
 def handle(self, txn):
     if txn == "NuLogin":
         self.pid += 1
         self.login_key = string_util.random_str(24)
         packet = packet_encoder.append('TXN', 'NuLogin')
-        packet += packet_encoder.append('profileId', '1001')
-        packet += packet_encoder.append('userId', '1001')
+        packet += packet_encoder.append('profileId', CONFIG['Settings']['AccountID'])
+        packet += packet_encoder.append('userId', CONFIG['Settings']['AccountID'])
         packet += packet_encoder.append('nuid', 'lucas')
         packet += packet_encoder.append('lkey', self.login_key, True)
         packet = packet_encoder.encode('acct', self.pid, packet)
@@ -36,7 +39,7 @@ def handle(self, txn):
         packet += packet_encoder.append('DOBDay', '1')
         packet += packet_encoder.append('DOBMonth', '1')
         packet += packet_encoder.append('DOBYear', '2017')
-        packet += packet_encoder.append('userId', '1001')
+        packet += packet_encoder.append('userId', CONFIG['Settings']['AccountID'])
         packet += packet_encoder.append('globalOptin', '0')
         packet += packet_encoder.append('thidPartyOptin', '0')
         packet += packet_encoder.append('language', 'enUS')
@@ -50,8 +53,8 @@ def handle(self, txn):
         self.loginkey = string_util.random_str(24)
         packet = packet_encoder.append('TXN', 'NuLoginPersona')
         packet += packet_encoder.append('lkey', self.loginkey)
-        packet += packet_encoder.append('profileId', '1001')
-        packet += packet_encoder.append('userId', '1001')
+        packet += packet_encoder.append('profileId', CONFIG['Settings']['AccountID'])
+        packet += packet_encoder.append('userId', CONFIG['Settings']['AccountID'])
         packet = packet_encoder.encode('acct', self.pid, packet)
         self.transport.getHandle().sendall(packet)
         self.log.debug(f'[{self.name}] Sent packet=NuLoginPersona')
