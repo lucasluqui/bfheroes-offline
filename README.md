@@ -13,8 +13,6 @@ The following lines must be added to your hosts file (`Windows\System32\drivers\
 127.0.0.1 bfwest-dedicated.fesl.ea.com
 127.0.0.1 bfwest-server.fesl.ea.com
 127.0.0.1 fesl.ea.com
-127.0.0.1 master.phoenixnetwork.net
-127.0.0.1 magma.phoenixnetwork.net
 ```
 
 ## Features
