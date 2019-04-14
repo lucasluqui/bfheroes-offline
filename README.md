@@ -4,7 +4,7 @@ Allows you to run your own Battlefield Heroes environment without any internet c
 ## Release Candidates (Full downloads)
 As you might have noticed **game files** and some other executables **aren't** sourced **here**, therefore you **wont be able to run anything**.
 
-Full **release candidates** can be found **in this Discord**: https://discord.gg/9uwyBVA *(channel: `#bfheroes-offline`)*
+Full **release candidates** can be found **in this Discord**: https://discord.gg/9uwyBVA *(channel `#releases` under `bfheroes-offline` category)*
 
 ## Editing your hosts file
 The following lines must be added to your hosts file (`Windows\System32\drivers\etc\hosts`)
