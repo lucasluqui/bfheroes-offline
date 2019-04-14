@@ -22,8 +22,7 @@ class run(resource.Resource):
             return reply.encode('utf-8', 'ignore')
 
         elif '/nucleus/check/user/' in uri:
-            persona = json.load(open(json_personas.path+uri.replace('/nucleus/check/user/','')+'.json', "r"))
-            reply = '<name>'+persona.get('heroName', 'undefined')+'</name>'
+            reply = '<name>'+json_personas.global_stats.get('name', 'undefined')+'</name>'
             self.log.info(f"[{self.name}] GET reply={reply}")
             return reply.encode('utf-8', 'ignore')
 
