@@ -1,7 +1,7 @@
 import logging
 from twisted.internet.protocol import Protocol
 from util import packet_reader, data_util
-from fesl.cmd.client import fsys, acct, rank
+from fesl.cmd.client import fsys, acct, rank, pnow
 
 class run(Protocol):
 
@@ -45,6 +45,8 @@ class run(Protocol):
                 acct.handle(self, txn=txn)
             elif command == "rank":
                 rank.handle(self, txn=txn, data=packet)
+            elif command == "pnow":
+                pnow.handle(self, txn=txn, data=packet)
             elif len(command.split()) > 0:
                 rank.handle(self, txn=txn, data=packet)
             else:
