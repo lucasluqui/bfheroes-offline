@@ -20,6 +20,7 @@ The following lines must be added to your hosts file (`Windows\System32\drivers\
 * All items and weapons in your inventory.
 * Tutorial gamemode. Map and gamemode can be changed in `game/mods/bfheroes/Settings/maplist.con`
 * Functional MagmaAPI (Magma has to be manually enabled in `src/config.ini`), which allows you to play around with entitlements/store/friends/bookmarks.
+* Functional WebBrowserAPI, which allows you to play around with in-game and client menu dynamic media.
 
 ## To-do
 * Local gameserver.
