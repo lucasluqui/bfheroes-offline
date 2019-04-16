@@ -37,6 +37,13 @@ class run(resource.Resource):
             request.setHeader('content-type', 'image/'+image_name.split('.')[1])
             self.log.debug(f'[{self.name}] GET reply={image_name}')
             return image.read()
+
+        elif uri == '/en/game/eor':
+            image_name = self.config['WebBrowser']['ServedEOR']
+            image = open(self.config['Paths']['WebBrowserRsrcPath']+'eor/'+image_name, 'rb')
+            request.setHeader('content-type', 'image/'+image_name.split('.')[1])
+            self.log.debug(f'[{self.name}] GET reply={image_name}')
+            return image.read()
     
     def render_POST(self, request):
         self.log.debug(f'[{self.name}] {request}')
