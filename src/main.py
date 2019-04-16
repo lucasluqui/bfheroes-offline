@@ -23,7 +23,7 @@ def run():
         log.debug('Attempting to automatically start the game...')
         try:
             subprocess.STARTF_USESHOWWINDOW = 1
-            cmdline = 'cd '+CONFIG['Settings']['GameFolderName']+'&BFHeroes.exe +webBrowser 1 +sessionId '+CONFIG['Settings']['SessionID']+' +ignoreAsserts 1 +magma '+CONFIG['Settings']['Magma']+' +magmaProtocol '+CONFIG['Settings']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
+            cmdline = 'cd '+CONFIG['Paths']['GameFolderName']+'&BFHeroes.exe +webBrowser '+CONFIG['WebBrowser']['UseWebBrowser']+' +sessionId '+CONFIG['Settings']['SessionID']+' +ignoreAsserts 1 +magma '+CONFIG['Magma']['UseMagma']+' +magmaProtocol '+CONFIG['Magma']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
             subprocess.Popen(cmdline, shell=True)
             log.info('Game started.')
         except Exception as err:
