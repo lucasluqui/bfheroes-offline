@@ -10,6 +10,7 @@ from util.logger import StreamHandler, FileHandler
 from fesl import fesl_client_manager, fesl_server_manager
 from theater import theater_client_manager, theater_server_manager
 from magma import magma_api
+from webbrowser import webbrowser_api
 
 def run():
 
@@ -22,7 +23,7 @@ def run():
         log.debug('Attempting to automatically start the game...')
         try:
             subprocess.STARTF_USESHOWWINDOW = 1
-            cmdline = 'cd '+CONFIG['Settings']['GameFolderName']+'&BFHeroes.exe +sessionId '+CONFIG['Settings']['SessionID']+'+ignoreAsserts 1 +magma '+CONFIG['Settings']['Magma']+' +magmaProtocol '+CONFIG['Settings']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
+            cmdline = 'cd '+CONFIG['Settings']['GameFolderName']+'&BFHeroes.exe +webBrowser 1 +sessionId '+CONFIG['Settings']['SessionID']+' +ignoreAsserts 1 +magma '+CONFIG['Settings']['Magma']+' +magmaProtocol '+CONFIG['Settings']['MagmaProtocol']+' +magmaHost '+CONFIG['Settings']['Hostname']+' /overridessl 0 /overridehostname óíñ╜ú╜ú╜ó'
             subprocess.Popen(cmdline, shell=True)
             log.info('Game started.')
         except Exception as err:
@@ -33,7 +34,7 @@ def run():
     for service in services:
         port = services[service]['port']
         
-        if service != "MagmaAPI":
+        if service != "MagmaAPI" and service != "WebBrowserAPI":
             try:
                 factory = Factory()
                 
@@ -57,8 +58,15 @@ def run():
                 log.error(err)
                 sys.exit(1)
         else:
+            
             try:
-                site = server.Site(magma_api.run())
+
+                if service == "MagmaAPI":
+                    site = server.Site(magma_api.run())
+
+                elif service == "WebBrowserAPI":
+                    site = server.Site(webbrowser_api.run())
+
                 reactor.listenTCP(port, site)
             
             except Exception as err:
