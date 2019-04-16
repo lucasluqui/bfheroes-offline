@@ -5,7 +5,7 @@ from util import json_personas
 
 class run(resource.Resource):
     def __init__(self):
-        self.name = "Magma API"
+        self.name = "MagmaAPI"
         self.log = logging.getLogger('root')
         self.config = ConfigObj('src/config.ini')
         self.abilitiesOwned = []
