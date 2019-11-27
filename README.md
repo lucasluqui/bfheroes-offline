@@ -1,5 +1,5 @@
 # bfheroes-offline
-Allows you to run your own Battlefield Heroes environment without any internet connection (localhost).
+An emulator for Battlefield Heroes purely focused on offline/LAN play.
 
 ## Release Candidates (Full downloads)
 As you might have noticed **game files** and some other executables **aren't** sourced **here**, therefore you **wont be able to run anything**.
